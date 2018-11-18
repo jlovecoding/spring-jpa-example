@@ -34,3 +34,14 @@ CREATE TABLE discount(
   shopping_cart_id int NOT NULL,
   FOREIGN KEY (shopping_cart_id) REFERENCES shopping_cart(shopping_cart_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- audit
+CREATE TABLE payments(
+    payment_id int AUTO_INCREMENT PRIMARY KEY,
+    amount float NOT NULL,
+    created_by varchar(100) NOT NULL,
+    created datetime NOT NULL,
+    modified_by varchar(100),
+    modified datetime,
+    PRIMARY KEY(payment_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

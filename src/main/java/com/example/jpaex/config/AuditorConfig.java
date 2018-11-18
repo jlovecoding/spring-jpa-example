@@ -1,0 +1,30 @@
+package com.example.jpaex.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.AuditorAware;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+import java.util.Optional;
+
+@EnableJpaRepositories(basePackages = {"com.example.jpaex.audit"})
+@EnableJpaAuditing(auditorAwareRef = "auditorProvider")
+@Configuration
+public class AuditorConfig {
+
+    @Bean
+    AuditorAware<String> auditorProvider() {
+        return new AuditorAwareImpl();
+    }
+
+    public class AuditorAwareImpl implements AuditorAware<String> {
+
+        @Override
+        public Optional<String> getCurrentAuditor() {
+            return Optional.of("customer1234");
+        }
+
+    }
+
+}
